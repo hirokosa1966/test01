@@ -1,0 +1,25 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+ansible-lint = "*"
+molecule = { extras = ["docker","lint"] }
+yamllint = "*"
+flake8 = "*"
+autopep8 = "*"
+mypy = "*"
+
+[packages]
+ansible = "==4.3"
+prettytable = "*"
+lxml = "*"
+jmespath = "*"
+boxsdk = {version = "==2.4.1",extras = ["jwt"]}
+softlayer = "*"
+httplib2 = ">=0.18"
+python-dateutil = "*"
+
+[requires]
+python_version = "3.9.2"
