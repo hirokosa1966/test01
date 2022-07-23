@@ -1,0 +1,45 @@
+---
+language: python
+python: 3.9
+env:
+  - PIPENV_IGNORE_VIRTUALENVS=1
+
+# Use the new container infrastructure
+sudo: false
+
+#dist: trusty # Ubuntu 14.04
+dist: bionic # Ubuntu 18.04
+
+# Install ansible
+addons:
+  apt:
+    packages:
+      #- python-pip
+      - python3-pip
+
+# before_install:
+  # Make sure everything's up to date.
+  #- sudo apt-get update
+
+install:
+  # Install ansible
+  #- pip install -r ./requirements.txt
+  - 'python -m pip install pipenv'
+  #- 'pipenv sync'
+  - 'pipenv install --system --skip-lock'
+
+  # Check ansible version
+  - ansible --version
+
+script:
+  # Check the role/playbook's syntax.
+  - "echo $RANDOM > /tmp/vault_password_file"
+# - "ansible-playbook -i inventories/template/hosts_template.yml playbooks/install-common-server.yml --syntax-check -vv"
+#  - "ansible-playbook -i inventories/template/hosts_template.yml playbooks/site-ha-wo-hotfix.yml --syntax-check -vv"
+#  - "ansible-playbook -i inventories/template-all-in-one/hosts_template-all-in-one.yml playbooks/site-aio-wo-hotfix.yml --syntax-check -vv"
+#  - "ansible-playbook -i inventories/template/hosts_template.yml playbooks/site-aws-wo-hotfix.yml --syntax-check -vv"
+#  - "scripts/hotfix/install-all-hotfixes.sh -i inventories/template/hosts_template.yml --syntax-check -vv"
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+
